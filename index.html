@@ -1,0 +1,25 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>협곡은 못말려 IR덱</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b1f3a;color:#fff;font-family:"Malgun Gothic",system-ui,sans-serif;display:flex;flex-direction:column;height:100vh}
+header{display:flex;gap:12px;align-items:center;padding:10px 16px;font-size:14px}header b{flex:1}
+header a{color:#0b1f3a;background:#9fe3ea;padding:6px 12px;border-radius:999px;text-decoration:none;font-weight:700;font-size:13px}
+main{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:0 8px}
+img{max-width:100%;max-height:100%;aspect-ratio:16/9;box-shadow:0 8px 30px #0008;background:#fff}
+nav{display:flex;gap:16px;justify-content:center;align-items:center;padding:12px}
+button{background:#0fa3b1;color:#fff;border:0;border-radius:8px;padding:10px 22px;font-size:16px;cursor:pointer}
+span{min-width:60px;text-align:center}
+</style></head><body>
+<header><b>협곡은 못말려 · IR덱 (14장)</b><a href="canyon-ir-deck.pdf">PDF</a><a href="canyon-ir-deck.pptx">PPTX</a></header>
+<main><img id="s" alt="slide"></main>
+<nav><button id="p">◀</button><span id="n"></span><button id="x">▶</button></nav>
+<script>
+var N=14,i=1,s=document.getElementById('s'),n=document.getElementById('n');
+function go(k){i=Math.max(1,Math.min(N,k));s.src='img/s'+String(i).padStart(2,'0')+'.png';n.textContent=i+' / '+N;location.hash=i}
+document.getElementById('p').onclick=function(){go(i-1)};document.getElementById('x').onclick=function(){go(i+1)};
+document.onkeydown=function(e){if(e.key=='ArrowRight'||e.key==' ')go(i+1);if(e.key=='ArrowLeft')go(i-1)};
+var t;s.onclick=function(e){go(e.offsetX>s.width/2?i+1:i-1)};
+document.addEventListener('touchstart',function(e){t=e.touches[0].clientX});
+document.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-t;if(Math.abs(d)>50)go(d<0?i+1:i-1)});
+go(parseInt(location.hash.slice(1))||1);
+</script></body></html>
